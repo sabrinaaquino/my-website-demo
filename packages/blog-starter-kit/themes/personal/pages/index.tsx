@@ -24,6 +24,7 @@ import {
 } from '../generated/graphql';
 
 const GQL_ENDPOINT = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT;
+console.log(process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT);
 
 type Props = {
 	publication: PublicationFragment;
