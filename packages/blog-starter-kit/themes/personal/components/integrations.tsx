@@ -1,6 +1,12 @@
 import { useEffect } from 'react';
 import { useAppContext } from './contexts/appContext';
 
+declare global {
+	interface Window {
+	  gtag: any;
+	}
+}
+
 export function Integrations() {
 	const { publication } = useAppContext();
 	const {
@@ -76,6 +82,7 @@ export function Integrations() {
 		};
 	}, []);
 	
+
 
 	return (
 		<>
