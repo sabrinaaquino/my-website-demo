@@ -60,12 +60,22 @@ export function Integrations() {
   `;
 
 	useEffect(() => {
-		// @ts-ignore
-		window.gtag('config', gaTrackingID, {
+		function handleScriptLoad() {
+		if (typeof window.gtag === 'function') {
+			window.gtag('config', gaTrackingID, {
 			transport_url: 'https://ping.hashnode.com',
 			first_party_collection: true,
-		});
+			});
+		}
+		}
+	
+		window.addEventListener('load', handleScriptLoad);
+		
+		return () => {
+		window.removeEventListener('load', handleScriptLoad);
+		};
 	}, []);
+	
 
 	return (
 		<>

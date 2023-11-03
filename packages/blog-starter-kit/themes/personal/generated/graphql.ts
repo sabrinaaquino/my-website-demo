@@ -282,15 +282,19 @@ export type DomainStatus = {
 export type Draft = Node & {
   __typename?: 'Draft';
   /** The author of the draft. */
-  author?: Maybe<User>;
+  author: User;
+  canonicalUrl?: Maybe<Scalars['String']['output']>;
   /** Content of the draft in HTML and markdown */
   content?: Maybe<Content>;
   /** The cover image preference of the draft. Contains cover image URL and other details. */
   coverImage?: Maybe<DraftCoverImage>;
-  /** Unique identifier for the draft. */
-  cuid?: Maybe<Scalars['String']['output']>;
-  /** The date the draft was updated. */
+  /**
+   * The date the draft was updated.
+   * @deprecated Use updatedAt instead. Will be removed on 26/12/2023.
+   */
   dateUpdated: Scalars['DateTime']['output'];
+  /** Draft feature-related fields. */
+  features: DraftFeatures;
   /** The ID of the draft. */
   id: Scalars['ID']['output'];
   /** Information about the last backup of the draft. */
@@ -299,10 +303,22 @@ export type Draft = Node & {
   lastFailedBackupAt?: Maybe<Scalars['DateTime']['output']>;
   /** The date the draft was last successfully backed up. */
   lastSuccessfulBackupAt?: Maybe<Scalars['DateTime']['output']>;
+  /** OG meta-data of the draft. Contains image url used in open graph meta tags. */
+  ogMetaData?: Maybe<OpenGraphMetaData>;
+  readTimeInMinutes: Scalars['Int']['output'];
+  /** SEO information of the draft. Contains title and description used in meta tags. */
+  seo?: Maybe<Seo>;
+  /** Information of the series the draft belongs to. */
+  series?: Maybe<Series>;
+  settings: DraftSettings;
+  slug: Scalars['String']['output'];
+  /** The subtitle of the draft. It would become the subtitle of the post when published. */
+  subtitle?: Maybe<Scalars['String']['output']>;
   /** Returns list of tags added to the draft. Contains tag id, name, slug, etc. */
   tags: Array<Tag>;
   /** The title of the draft. It would become the title of the post when published. */
   title?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['DateTime']['output'];
 };
 
 export type DraftBackup = {
@@ -330,6 +346,12 @@ export type DraftConnection = Connection & {
 /** Contains information about the cover image of the draft. */
 export type DraftCoverImage = {
   __typename?: 'DraftCoverImage';
+  /** Provides attribution information for the cover image, if available. */
+  attribution?: Maybe<Scalars['String']['output']>;
+  /** True if the image attribution should be hidden. */
+  isAttributionHidden: Scalars['Boolean']['output'];
+  /** The name of the photographer who captured the cover image. */
+  photographer?: Maybe<Scalars['String']['output']>;
   /** The URL of the cover image. */
   url: Scalars['String']['output'];
 };
@@ -341,6 +363,21 @@ export type DraftEdge = Edge & {
   cursor: Scalars['String']['output'];
   /** A node in the connection containing a draft. */
   node: Draft;
+};
+
+export type DraftFeatures = {
+  __typename?: 'DraftFeatures';
+  tableOfContents: TableOfContentsFeature;
+};
+
+export type DraftSettings = {
+  __typename?: 'DraftSettings';
+  /** A flag to indicate if the comments are disabled for the post. */
+  disableComments: Scalars['Boolean']['output'];
+  /** Wether or not the post is hidden from the Hashnode community. */
+  isDelisted: Scalars['Boolean']['output'];
+  /** A flag to indicate if the cover image is shown below title of the post. Default position of cover is top of title. */
+  stickCoverToBottom: Scalars['Boolean']['output'];
 };
 
 /**
@@ -442,6 +479,8 @@ export enum FeedType {
    * Personalised feed is curated per requesting user basis.
    */
   Personalized = 'PERSONALIZED',
+  /** Returns posts which were viewed by the user, sorted based on recency. */
+  ReadingHistory = 'READING_HISTORY',
   /** Returns posts which were published recently, sorted based on recency. */
   Recent = 'RECENT',
   /** Returns posts based on old personalization algorithm. */
@@ -808,7 +847,7 @@ export type Post = Node & {
   isFollowed?: Maybe<Scalars['Boolean']['output']>;
   /** A list of users who liked the post. */
   likedBy: PostLikerConnection;
-  /** Og Meta data of the post. Contains image url used in open graph meta tags. */
+  /** OG meta-data of the post. Contains image url used in open graph meta tags. */
   ogMetaData?: Maybe<OpenGraphMetaData>;
   /** Preference settings for the post. Contains information about if the post is pinned to blog, comments are disabled, etc. */
   preferences: PostPreferences;
@@ -966,12 +1005,13 @@ export enum PostCommenterSortBy {
 /** Contains information about the cover image of the post. */
 export type PostCoverImage = {
   __typename?: 'PostCoverImage';
+  /** Provides attribution information for the cover image, if available. */
   attribution?: Maybe<Scalars['String']['output']>;
   /** True if the image attribution should be hidden. */
   isAttributionHidden: Scalars['Boolean']['output'];
-  /** The URL of the cover image thumbnail. */
+  /** Indicates whether the cover image is in portrait orientation. */
   isPortrait: Scalars['Boolean']['output'];
-  /** The photographer of the cover image. */
+  /** The name of the photographer who captured the cover image. */
   photographer?: Maybe<Scalars['String']['output']>;
   /** The URL of the cover image. */
   url: Scalars['String']['output'];
@@ -1671,8 +1711,10 @@ export enum Scope {
   CreatePro = 'create_pro',
   ImportSubscribersToPublication = 'import_subscribers_to_publication',
   PublicationAdmin = 'publication_admin',
+  PublishDraft = 'publish_draft',
   RecommendPublications = 'recommend_publications',
   Signup = 'signup',
+  UpdatePost = 'update_post',
   WebhookAdmin = 'webhook_admin',
   WritePost = 'write_post',
   WriteSeries = 'write_series'
@@ -2207,7 +2249,7 @@ export type DraftByIdQueryVariables = Exact<{
 }>;
 
 
-export type DraftByIdQuery = { __typename?: 'Query', draft?: { __typename?: 'Draft', id: string, title?: string | null, dateUpdated: string, content?: { __typename?: 'Content', markdown: string } | null, author?: { __typename?: 'User', id: string, name: string, username: string } | null, tags: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> } | null };
+export type DraftByIdQuery = { __typename?: 'Query', draft?: { __typename?: 'Draft', id: string, title?: string | null, dateUpdated: string, content?: { __typename?: 'Content', markdown: string } | null, author: { __typename?: 'User', id: string, name: string, username: string }, tags: Array<{ __typename?: 'Tag', id: string, name: string, slug: string }> } | null };
 
 export type PageByPublicationQueryVariables = Exact<{
   slug: Scalars['String']['input'];
