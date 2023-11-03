@@ -8,7 +8,7 @@ const Home: React.FC = () => {
 
   React.useEffect(() => {
     router.push('/');
-  }, []);
+  }, [router]);
 
   return (
     <div>
