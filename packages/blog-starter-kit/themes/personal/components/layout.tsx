@@ -1,3 +1,5 @@
+'use-client'
+
 import { Analytics } from './analytics';
 import { Integrations } from './integrations';
 import { Meta } from './meta';
