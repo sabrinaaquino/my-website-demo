@@ -13,8 +13,8 @@ const Home: React.FC = () => {
   return (
     <div>
       <Header />
-      <h1 className="font-semibold text-2xl mb-8 tracking-tighter">Welcome to the home page!</h1>
-      <p className="prose prose-neutral dark:prose-invert">This is the main landing page.</p>
+      <h1 className="font-semibold text-2xl mb-8 tracking-tighter">Hi! I'm Sabrina</h1>
+      <p className="prose prose-neutral dark:prose-invert">I'm a human who loves math, science, solving problems, and writing code.</p>
     </div>
   );
 }
