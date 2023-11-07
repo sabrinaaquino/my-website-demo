@@ -3,8 +3,9 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 
 const links = [
-  { path: '/', name: 'Home' },
-  { path: '/blog', name: 'Blog' },
+  { path: '/', name: 'home' },
+  { path: '/blog', name: 'blog' },
+  { path: '/books', name: 'books'},
 ];
 
 export default function Header() {
@@ -20,9 +21,10 @@ export default function Header() {
               <Link href={link.path}>
                 <span
                   className={clsx(
-                    'transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle cursor-pointer',
+                    'transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle cursor-pointer pb-1',
                     {
                       'text-neutral-500': !isActive(link.path),
+                      'border-b border-gray-300': isActive(link.path),
                     }
                   )}
                 >

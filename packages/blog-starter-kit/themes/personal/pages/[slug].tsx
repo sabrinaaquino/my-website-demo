@@ -28,6 +28,8 @@ import {
 	SlugPostsByPublicationQueryVariables,
 	StaticPageFragment,
 } from '../generated/graphql';
+import Header from '../components/header';
+
 
 type Props =
 	| {
