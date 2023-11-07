@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Header from '../components/header';
+import Link from 'next/link';
 
 const PUBLICATION_ID = "6199dbc85bb9cc256fc6a2b2";
 
@@ -41,17 +42,19 @@ const Newsletter: React.FC = () => {
   };
 
   return (
-    <div>
+    <div >
+      <div className="flex items-center justify-center ">
       <Header />
-      <img src="/avatar.png" alt="Sabrina" className="absolute top-0 right-1/3 w-32 transform rotate-180" />
-      <div className="flex flex-col items-center justify-center min-h-screen">
+      <img src="/avatar.png" alt="Sabrina" className="w-32 ml-20 transform rotate-180" />
+      </div>
+      <div className="flex flex-col items-center justify-start pt-40 min-h-screen">
         <img 
             src="/Ackchyually.jpg" 
             alt="Ackchyually" 
             className="w-32 h-32 rounded-full object-cover mb-2"
         />
         <h1 className="mb-4 text-2xl font-bold text-center">Ackchyually</h1>
-        <p className="mb-4 text-center">Always know the next nerd thing to say</p>
+        <p className="mb-4 text-center text-gray-500">Always know the next nerd thing to say</p>
         <div className="w-full max-w-md">
           <input 
             type="email" 
@@ -72,7 +75,7 @@ const Newsletter: React.FC = () => {
           {message && <p>{message}</p>}
         </div>
       </div>
-    </div>
+      </div>
   );
 };
 

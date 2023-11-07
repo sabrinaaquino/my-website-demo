@@ -60,7 +60,7 @@ export default function Blog({ publication, initialPosts, initialPageInfo }: Pro
 	return (
 		<AppProvider publication={publication}>
 			<Layout>
-			<img src="/avatar.png" alt="Sabrina" className="absolute top-0 right-1/3 w-32 transform rotate-180" />
+			
 				<Head>
 					<title>{publication.title}</title>
 					<meta
@@ -87,7 +87,10 @@ export default function Blog({ publication, initialPosts, initialPageInfo }: Pro
 						}}
 					/>
 				</Head>
+				<div className="flex items-center justify-center ">
 				<Header />
+				<img src="/avatar.png" alt="Sabrina" className="w-32 ml-20 transform rotate-180" />
+				</div>
 				<Container className="mx-auto flex max-w-2xl flex-col items-stretch gap-10 px-5 py-10">
 					<PersonalHeader />
 					{posts.length > 0 && <MinimalPosts context="home" posts={posts} />}
