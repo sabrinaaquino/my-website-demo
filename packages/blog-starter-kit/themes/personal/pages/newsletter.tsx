@@ -54,7 +54,7 @@ const Newsletter: React.FC = () => {
             className="w-32 h-32 rounded-full object-cover mb-2"
         />
         <h1 className="mb-4 text-2xl font-bold text-center">Ackchyually</h1>
-        <p className="mb-4 text-center text-gray-500">Always know the next nerd thing to say</p>
+        <p className="mb-4 text-center text-gray-500">always know the next nerd thing to say</p>
         <div className="w-full max-w-md">
           <input 
             type="email" 
@@ -72,7 +72,8 @@ const Newsletter: React.FC = () => {
               {loading ? 'Subscribing...' : 'Subscribe'}
             </button>
           </div>
-          {message && <p>{message}</p>}
+          
+          {message && <p  className="text-red-500 text-center mt-4">{message}</p>}
         </div>
       </div>
       </div>

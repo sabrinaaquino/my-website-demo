@@ -23,6 +23,7 @@ import {
 	PublicationFragment,
 } from '../generated/graphql';
 import Header from '../components/header';
+import { HeroPost } from '../components/hero-post';
 
 
 const GQL_ENDPOINT = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT;
@@ -93,6 +94,7 @@ export default function Blog({ publication, initialPosts, initialPageInfo }: Pro
 				</div>
 				<Container className="mx-auto flex max-w-2xl flex-col items-stretch gap-10 px-5 py-10">
 					<PersonalHeader />
+					
 					{posts.length > 0 && <MinimalPosts context="home" posts={posts} />}
 					{!loadedMore && pageInfo.hasNextPage && pageInfo.endCursor && (
 						<button className="bg-white" onClick={loadMore}>
