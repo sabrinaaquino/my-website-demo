@@ -4,8 +4,9 @@ import { usePathname } from 'next/navigation';
 
 const links = [
   { path: '/', name: 'home' },
+  { path: '/movies', name: 'movies'},
   { path: '/blog', name: 'blog' },
-  { path: '/books', name: 'books'},
+  { path: '/newsletter', name: 'newsletter' },
 ];
 
 export default function Header() {

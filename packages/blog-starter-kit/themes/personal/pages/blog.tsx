@@ -60,6 +60,7 @@ export default function Blog({ publication, initialPosts, initialPageInfo }: Pro
 	return (
 		<AppProvider publication={publication}>
 			<Layout>
+			<img src="/avatar.png" alt="Sabrina" className="absolute top-0 right-1/3 w-32 transform rotate-180" />
 				<Head>
 					<title>{publication.title}</title>
 					<meta
